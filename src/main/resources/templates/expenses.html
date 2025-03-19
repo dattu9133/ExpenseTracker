@@ -10,9 +10,85 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
     <style>
         body {
-            font-family: 'Fira Code', monospace;
+            font-family: 'FirCode', monospace;
+            background-color: #c6c6c6;
+        }
+
+
+        table {
+            /* border: 1px black solid; */
+            margin-top: 20px;
+            padding: 5px !important;
+            box-shadow: 0px 0px 5px rgb(189, 189, 189);
+            border-radius: 10px !important;
+        }
+
+        th {
+            padding: 12px !important;
+        }
+
+        td {
+            padding-left: 5px;
+        }
+
+        .navbar {
+            margin-right: 12px;
+            margin-top: 10px;
+            margin-left: 12px;
+            border: 0;
+            border-radius: 10px;
+            background-image: linear-gradient(174.2deg, rgb(32, 87, 129) 7.1%, rgb(27, 85, 130) 67.4%) !important;
+            padding: 10px;
+            box-shadow: 5px 5px 5px #888888;
+        }
+
+        .left-column {
+            flex: 1.5;
+            border: 0;
+            /* Set a border for the container */
+            border-radius: 10px;
+            background-image: linear-gradient(174.2deg, rgb(255, 255, 255) 7.1%, rgb(255, 255, 255) 67.4%) !important;
+
+            padding: 10px;
+            margin-top: 5px
+        }
+
+        .right-column {
+            flex: 1.5;
+            border: 0;
+            /* Set a border for the container */
+            border-radius: 10px;
+            background-image: linear-gradient(174.2deg, rgb(255, 255, 255) 7.1%, rgb(255, 255, 255) 67.4%) !important;
+            padding: 10px;
+            margin-top: 5px
+        }
+
+        .center-column {
+
+            flex: 4;
+            margin-right: 5px;
+            margin-left: 5px;
+            overflow-y: auto;
+            border: 0;
+            border-radius: 10px;
+            background-image: linear-gradient(174.2deg, rgb(255, 255, 255) 7.1%, rgb(255, 255, 255) 67.4%) !important;
+            margin-top: 5px
+        }
+
+        .total-expense {
+            background-color: rgb(32, 87, 129);
+            color: #ffffff !important;
+            padding: 10px 25px;
+            margin: 20px auto;
+            width: fit-content;
+            border-radius: 20px;
         }
     </style>
 </head>
@@ -20,7 +96,8 @@
 <body class="body">
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
-            <a class="navbar-brand" style="color: #232526" th:href="@{/expenses}">BudgetPal</a>
+            <a class="navbar-brand" style="color: #ffffff; font-weight: 700; font-size: 35px;"
+                th:href="@{/expenses}">BudgetPal</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
                 aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -35,8 +112,9 @@
         <div class="left-column">
             <div class="container-sm">
                 <div><br></div>
-                <h3>Filter <img width="25" height="25" src="https://img.icons8.com/ios-filled/50/filter--v1.png"
-                        alt="filter--v1" /></h3>
+                <h3 style="color: rgb(32, 87, 129) ; font-size: 30px; font-weight: 600;">Filter <img width="25"
+                        height="25" style="color: rgb(32, 87, 129)"
+                        src="https://img.icons8.com/ios-filled/50/filter--v1.png" alt="filter--v1" /></h3>
                 <div class="mb-3">
                     <form th:action="@{/expenses/filter}" method="get">
                         <label class="form-label" for="year">Select Year:</label>
@@ -79,7 +157,7 @@
         <div class="center-column">
             <div>&nbsp</div>
             <div class="total-expense">
-                <h5 style="font-weight: bold">Total Expenses: [[${{totalAmount}}]]</h5>
+                <h5 style="font-weight: bold;margin: 0;">Total Expenses: [[${{totalAmount}}]]</h5>
             </div>
             <div><br></div>
             <div class="container-sm" th:if="${expenses.isEmpty()}">
@@ -87,7 +165,7 @@
             </div>
             <div class="table-test">
                 <div class="container-sm" th:unless="${expenses.isEmpty()}">
-                    <h3 class="tableHead"
+                    <h3 style="color: rgb(32, 87, 129); font-weight: 500;" class="tableHead"
                         th:text="(${year} != null and ${month} != null) ? 'Expenses in ' + ${month} + ' ' + ${year} : 'All expenses'">
                         Expenses</h3>
                     <table class="table table-hover" id="data-table">
@@ -129,14 +207,14 @@
                         <div class="page-nav">
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination">
-                                    <li class="page-item"><a class="page-link" th:if="${expenses.number > 0}"
+                                    <li class=" page-item mx-2 "><a class="page-link" th:if="${expenses.number > 0}"
                                             th:href="@{/expenses(page=${expenses.number - 1})}">Previous</a></li>
 
                                     <!-- Show first page number -->
-                                    <li th:if="${expenses.number >= 1}" class="page-item"><a class="page-link"
+                                    <li th:if="${expenses.number >= 1}" class="page-item mx-2 "><a class="page-link"
                                             th:href="@{/expenses(page=0)}">1</a></li>
 
-                                    <li th:if="${expenses.number < 1}" class="page-item disabled">
+                                    <li th:if="${expenses.number < 1}" class="page-item mx-2  disabled">
                                         <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
                                     </li>
 
@@ -144,16 +222,16 @@
                                     <li th:if="${expenses.number >= 3}"><span class="page-link">...</span></li>
 
                                     <!-- Show two pages before the current page -->
-                                    <li th:if="${expenses.number >= 2}" class="page-item"><a class="page-link"
+                                    <li th:if="${expenses.number >= 2}" class="page-item mx-2 "><a class="page-link"
                                             th:href="@{/expenses(page=${expenses.number - 1})}"
                                             th:text="${expenses.number}"></a></li>
 
                                     <!-- Show the current page number -->
-                                    <li class="page-item active"><span class="page-link"
+                                    <li class="page-item mx-2  active"><span class="page-link"
                                             th:text="${expenses.number + 1}"></span></li>
 
                                     <!-- Show two pages after the current page -->
-                                    <li th:if="${expenses.number < expenses.totalPages - 1}" class="page-item"><a
+                                    <li th:if="${expenses.number < expenses.totalPages - 1}" class="page-item mx-2 "><a
                                             class="page-link" th:href="@{/expenses(page=${expenses.number + 1})}"
                                             th:text="${expenses.number + 2}"></a></li>
 
@@ -162,15 +240,16 @@
                                             class="page-link">...</span></li>
 
                                     <!-- Show last page number -->
-                                    <li th:if="${expenses.number < expenses.totalPages-2}" class="page-item"><a
+                                    <li th:if="${expenses.number < expenses.totalPages-2}" class="page-item mx-2 "><a
                                             class="page-link" th:href="@{/expenses(page=${expenses.totalPages - 1})}"
                                             th:text="${expenses.totalPages}"></a></li>
 
-                                    <li th:if="${expenses.number > expenses.totalPages-2}" class="page-item disabled">
+                                    <li th:if="${expenses.number > expenses.totalPages-2}"
+                                        class="page-item mx-2  disabled">
                                         <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Next</a>
                                     </li>
 
-                                    <li class="page-item"><a class="page-link"
+                                    <li class="page-item mx-2 "><a class="page-link"
                                             th:if="${expenses.number < expenses.totalPages - 1}"
                                             th:href="@{/expenses(page=${expenses.number + 1})}">Next</a></li>
                                 </ul>
@@ -193,7 +272,7 @@
             <div><br></div>
             <!-- Sidebar content -->
             <div class="container-sm">
-                <h3 class="tableHead">Add expense below:</h3>
+                <h3 class="tableHead" style="color: rgb(32, 87, 129); font-weight: 600;">Add expense below:</h3>
 
                 <form th:action="@{/AddExpense}" th:method="post" th:object="${expense}" novalidate>
 
@@ -219,8 +298,9 @@
                         </div>
                     </div>
 
-                    <div class="mb-3">
-                        <a th:href="@{/newExpenseType}" class="btn btn-outline-dark btn-add-new btn-shadow">Customize
+                    <div class="mb-3 p-3">
+                        <a th:href="@{/newExpenseType}" class="btn btn-outline-dark btn-add-new btn-shadow"
+                            style="font-size: 18px;min-height: fit-content;">Customize
                             your types of expense</a>
                     </div>
 
